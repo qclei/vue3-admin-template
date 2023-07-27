@@ -1,23 +1,19 @@
 <template>
-  <div class="box">
-    <h1>Hello work</h1>
+  <div>
+    <el-button type="primary" size="default" :icon="Plus">主要按钮</el-button>
+    <el-button type="success" size="small" :icon="Edit">编辑按钮</el-button>
+    <el-button type="danger" size="small" :icon="Delete">删除按钮</el-button>
+    <el-pagination
+      :page-sizes="[100, 200, 300, 400]"
+      small="small"
+      disabled="disabled"
+      background="background"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-const str = '我爱你祖国'
-for (let i = 0; i < 100; i++) {
-  console.log(i)
-}
+import { Plus, Edit, Delete } from '@element-plus/icons-vue'
 </script>
-
-<style lang="scss" scoped>
-.box {
-  width: 600px;
-  height: 400px;
-  background: black;
-  h1 {
-    color: white;
-  }
-}
-</style>
