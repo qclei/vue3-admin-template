@@ -1,11 +1,15 @@
 <template>
   <div>
-    <svg-icon name="phone" color="red"></svg-icon>
+    <h1>测试标题</h1>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped></style>
+<style scoped lang="scss">
+div {
+  h1 {
+    color: $base-color;
+  }
+}
+</style>

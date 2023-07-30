@@ -12,6 +12,7 @@ import gloablComponent from '@/components/index'
 
 import App from '@/App.vue'
 
+import '@/styles/index.scss'
 // 获取应用实例对象
 const app = createApp(App)
 app.use(ElementPlus, {
