@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view></router-view>
+    <h1>我是一个路由404</h1>
   </div>
 </template>
 

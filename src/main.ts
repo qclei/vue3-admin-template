@@ -11,8 +11,10 @@ import 'virtual:svg-icons-register'
 import gloablComponent from '@/components/index'
 
 import App from '@/App.vue'
-
+// 引入全局样式
 import '@/styles/index.scss'
+// 引入路由
+import router from '@/router'
 // 获取应用实例对象
 const app = createApp(App)
 app.use(ElementPlus, {
@@ -22,5 +24,7 @@ app.use(ElementPlus, {
 app.use(ElementPlus)
 //安装自定义插件对象
 app.use(gloablComponent)
+// 注册路由
+app.use(router)
 // 将应用挂载到挂载点上
 app.mount('#app')
