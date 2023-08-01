@@ -7,7 +7,7 @@
           class="login_form"
           :model="loginForm"
           :rules="rules"
-          ref="loginForms"
+          ref="loginFormRef"
         >
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
@@ -52,7 +52,7 @@ import { getTimeState } from '@/utils/time'
 let userStore = useUserStore()
 // 收集账号和表单数据
 let loginForm = reactive({ username: 'admin', password: '111111' })
-let loginForms = ref()
+let loginFormRef = ref()
 // 获取路由器
 let $router = useRouter()
 // 定义变量控制按钮加载
@@ -60,7 +60,7 @@ let loading = ref(false)
 // 登录数据回调
 const login = async () => {
   // 表单效验成功时才发请求
-  await loginForms.value.validate()
+  await loginFormRef.value.validate()
   // 加载效果
   loading.value = true
   // 点击登录按钮之后的操作
@@ -85,29 +85,29 @@ const login = async () => {
     loading.value = false
   }
 }
+
+// 自定义效验规则函数,rule:效验规则对象,value:表单元素文本内容,callback：符合条件callbak返回对象放行，不符合条件返回错误信息
+const vaildatorUserName = (_rule: any, value: any, callback: any) => {
+  if (/^\d{5,10}$/.test(value)) {
+    callback()
+  } else {
+    callback(new Error('账号长度为五位到十位'))
+  }
+}
+const vaildatorPassword = (_rule: any, value: any, callback: any) => {
+  if (value.length >= 6) {
+    callback()
+  } else {
+    callback(new Error('密码长度至少六位'))
+  }
+}
+
 // 定义表单效验需要配置的对象
 const rules = {
   // 对象规则属性
   // required: true 表示字段必须效验，min表示最小长度，max表示最大长度，message表示提示信息，trigger表示触发时机（blur:失去焦点，change改变）
-  username: [
-    { required: true, message: '用户名不能为空', trigger: 'blur' },
-    {
-      required: true,
-      min: 6,
-      max: 10,
-      message: '账号长度至少六位,最多10位',
-      trigger: 'change',
-    },
-  ],
-  password: [
-    {
-      required: true,
-      min: 6,
-      max: 15,
-      message: '密码长度至少六位,最多15位',
-      trigger: 'change',
-    },
-  ],
+  username: [{ validator: vaildatorUserName, trigger: 'change' }],
+  password: [{ validator: vaildatorPassword, trigger: 'change' }],
 }
 </script>
 
