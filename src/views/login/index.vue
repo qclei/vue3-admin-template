@@ -88,10 +88,10 @@ const login = async () => {
 
 // 自定义效验规则函数,rule:效验规则对象,value:表单元素文本内容,callback：符合条件callbak返回对象放行，不符合条件返回错误信息
 const vaildatorUserName = (_rule: any, value: any, callback: any) => {
-  if (/^\d{5,10}$/.test(value)) {
+  if (value.length >= 5) {
     callback()
   } else {
-    callback(new Error('账号长度为五位到十位'))
+    callback(new Error('账号长度为至少为五位'))
   }
 }
 const vaildatorPassword = (_rule: any, value: any, callback: any) => {
