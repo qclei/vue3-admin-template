@@ -42,6 +42,8 @@ import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 // 引入用户相关的小仓库
 import useUserStore from '@/store/modules/user'
+// 引入当前时间状态的函数
+import { getTimeState } from '@/utils/time'
 let userStore = useUserStore()
 // 收集账号和表单数据
 let loginForm = reactive({ username: 'admin', password: '111111' })
@@ -63,6 +65,7 @@ const login = async () => {
     ElNotification({
       type: 'success',
       message: '登录成功',
+      title: `HI,${getTimeState()}好`,
     })
   } catch (error) {
     ElNotification({
