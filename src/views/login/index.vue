@@ -3,13 +3,18 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form
+          class="login_form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="loginForm.username" />
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               type="password"
               placeholder="请输入"
@@ -47,12 +52,15 @@ import { getTimeState } from '@/utils/time'
 let userStore = useUserStore()
 // 收集账号和表单数据
 let loginForm = reactive({ username: 'admin', password: '111111' })
+let loginForms = ref()
 // 获取路由器
 let $router = useRouter()
 // 定义变量控制按钮加载
 let loading = ref(false)
 // 登录数据回调
 const login = async () => {
+  // 表单效验成功时才发请求
+  await loginForms.value.validate()
   // 加载效果
   loading.value = true
   // 点击登录按钮之后的操作
@@ -76,6 +84,30 @@ const login = async () => {
     // 加载效果消失
     loading.value = false
   }
+}
+// 定义表单效验需要配置的对象
+const rules = {
+  // 对象规则属性
+  // required: true 表示字段必须效验，min表示最小长度，max表示最大长度，message表示提示信息，trigger表示触发时机（blur:失去焦点，change改变）
+  username: [
+    { required: true, message: '用户名不能为空', trigger: 'blur' },
+    {
+      required: true,
+      min: 6,
+      max: 10,
+      message: '账号长度至少六位,最多10位',
+      trigger: 'change',
+    },
+  ],
+  password: [
+    {
+      required: true,
+      min: 6,
+      max: 15,
+      message: '密码长度至少六位,最多15位',
+      trigger: 'change',
+    },
+  ],
 }
 </script>
 
