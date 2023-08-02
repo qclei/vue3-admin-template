@@ -3,8 +3,9 @@
 $base-color: red;
 
 // 定义左侧带单属性
-$base-menu-width: 260px;
-$base-menu-background: #001529;
+$base-menu-width: 260px; // 菜单宽度
+$base-menu-background: #001529; //菜单背景颜色
+$base-menu-text-color: white; // 文字颜色
 
 // 定义顶部导航的属性
 $base-tabbar-height: 50px;
